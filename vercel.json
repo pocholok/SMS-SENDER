@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/proxy/(.*)",
+      "destination": "http://8.219.42.83:20003/$1"
+    }
+  ]
+}
