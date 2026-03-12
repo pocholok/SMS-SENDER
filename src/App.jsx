@@ -5,9 +5,9 @@ function App() {
   // State
   const [apiKey, setApiKey] = useState('0116C375');
   const [apiSecret, setApiSecret] = useState('SyGTjnercV8G');
-  const [apiUrl, setApiUrl] = useState('http://8.219.42.83:20003/sms/send'); 
-  const [balanceUrl, setBalanceUrl] = useState('http://8.219.42.83:20003/sms/balance'); 
-  const [balanceMethod, setBalanceMethod] = useState('POST');
+  const [apiUrl, setApiUrl] = useState('http://8.219.42.83:20003/sendsms'); 
+  const [balanceUrl, setBalanceUrl] = useState('http://8.219.42.83:20003/getbalance'); 
+  const [balanceMethod, setBalanceMethod] = useState('GET');
   const [balance, setBalance] = useState(null);
   const [numbersText, setNumbersText] = useState('573024141138');
   const [sentLog, setSentLog] = useState([]);
@@ -59,14 +59,14 @@ function App() {
 
       if (balanceMethod === 'POST') {
         options.body = JSON.stringify({
-          user: apiKey,
+          account: apiKey,
           password: apiSecret
         });
       } else {
         // GET Request: Append query params manually
         // Check if url already has params
         const separator = fetchUrl.includes('?') ? '&' : '?';
-        fetchUrl = `${fetchUrl}${separator}user=${encodeURIComponent(apiKey)}&password=${encodeURIComponent(apiSecret)}`;
+        fetchUrl = `${fetchUrl}${separator}account=${encodeURIComponent(apiKey)}&password=${encodeURIComponent(apiSecret)}`;
       }
 
       const response = await fetch(fetchUrl, options);
@@ -150,10 +150,11 @@ function App() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              user: apiKey,
+              account: apiKey,
               password: apiSecret,
-              phone: cleanNumber,
-              text: currentMessage
+              numbers: cleanNumber,
+              content: currentMessage,
+              smstype: 0
             })
           });
 
