@@ -242,11 +242,21 @@ function App() {
                  onClick={checkBalance}
                  className="bg-dark-700 hover:bg-dark-600 text-gray-300 border border-dark-600 px-3 py-1 rounded text-xs transition-colors"
                >
-                 Check
+                 Consultar Saldo
                </button>
-               {balance && <span className="text-green-400 text-xs font-mono self-center">{balance}</span>}
              </div>
           </div>
+
+        <div className="flex items-center gap-4">
+           <div className="min-w-[140px] text-right pr-3 text-xs text-gray-500">Saldo</div>
+            <input 
+              type="text" 
+              readOnly
+              placeholder="Presiona 'Consultar Saldo' para ver el resultado" 
+              className="bg-dark-900 border border-dark-600 rounded px-3 py-1 flex-[2] focus:outline-none text-green-400 text-xs font-mono"
+              value={balance || ''}
+            />
+        </div>
 
         <div className="flex items-center gap-4">
            <div className="min-w-[140px]"></div> {/* Spacer */}
